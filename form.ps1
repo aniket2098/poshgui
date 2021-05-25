@@ -38,10 +38,20 @@ $passwordLabelBox.height         = 10
 $passwordLabelBox.location       = New-Object System.Drawing.Point(101,140)
 $passwordLabelBox.Font           = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$Form.controls.AddRange(@($dbComboBox,$schemaComboBox,$passwordLabelBox))
+$Button1                         = New-Object system.Windows.Forms.Button
+$Button1.text                    = "Copy to clipboard"
+$Button1.width                   = 126
+$Button1.height                  = 33
+$Button1.location                = New-Object System.Drawing.Point(42,132)
+$Button1.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+$Button1.ForeColor               = [System.Drawing.ColorTranslator]::FromHtml("#ffffff")
+$Button1.BackColor               = [System.Drawing.ColorTranslator]::FromHtml("#4a90e2")
+
+$Form.controls.AddRange(@($dbComboBox,$schemaComboBox,$passwordLabelBox,$Button1))
 
 $dbComboBox.Add_SelectedIndexChanged({ fetchSchema $this $_ })
 $schemaComboBox.Add_SelectedIndexChanged({ getPassword $this $_ })
+$Button1.Add_Click({ copyToClipboard })
 
 function getPassword ($sender,$event) { }
 function fetchSchema ($sender,$event) { }
